@@ -12,10 +12,10 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
-    if @user.save#saveメソッドを行われる。それで何か起こるかどうか問題。
+    if @user.save
       session[:user_id] = @user.id
-      flash[:success] = '登録しました' #ここも謎
-      redirect_to root_path #ここ謎　＃’/’にリダイレクトしてくれるんだよね
+      flash[:success] = '登録しました' #一回だけ表示
+      redirect_to root_path 
     else
       flash.now[:danger] = '登録できませんでした'
       render :new

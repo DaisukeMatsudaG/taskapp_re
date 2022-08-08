@@ -1,10 +1,10 @@
 <h3>会員登録</h3>
 <%= form_with(model: @user, url: signup_path) do |f|%>
 <dl>
-    <dt>名前</dt>
+    <dt>氏名</dt>
     <dd><%= f.text_field :name %></dd>
     <dt>生年月日</dt>
-    <dd><%= f.date_select :birthday,  use_month_numbers: true,start_year: 1930, end_year: (Time.now.year),  :include_blank => true%></dd>
+    <dd><%= f.date_field  :sample_at => true%></dd>
     <dt>E-mail</dt>
     <dd><%= f.email_field :email %></dd>
     <dt>パスワード</dt>
