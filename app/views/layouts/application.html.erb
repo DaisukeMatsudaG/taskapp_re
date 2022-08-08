@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Taskapp</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+  <h1>Railsのユーザ認証</h1>
+  <p>
+    <%= link_to '会員登録', signup_path%>
+  </p>
+
+  <p>
+    <%= render 'commons/flash' %>
+    <%= yield %>
+  </p>
+  </body>
+</html>
