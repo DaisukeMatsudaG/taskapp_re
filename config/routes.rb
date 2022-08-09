@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 
   root to: 'users#show'
+  #post 'check', to: 'users#view'
 
   get 'signup', to: 'users#new'
   post 'signup', to: 'users#create'
@@ -13,6 +14,12 @@ Rails.application.routes.draw do
 
 
   #taskに関してのルーティング
-  resources :tasks
+  resources :tasks do
+    member do
+      patch :update_status
+    end
+  end
+
+
   #post '/' ,to: 'tasks#show'
 end

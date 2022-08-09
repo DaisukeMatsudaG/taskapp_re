@@ -10,8 +10,16 @@ class UsersController < ApplicationController
     #以下で全件を取得している。
     #current_user.tasks.allで全件、page~.でページネーションに関する記述
     #perで表示形式の変更
-    @tasks = current_user.tasks.all.page(params[:page]).per(20)  
+    status = params[:status]
+    if status.present?
+      @tasks = current_user.tasks.where(status: status).page(params[:page]).per(20)
+    else
+      @tasks = current_user.tasks.all.page(params[:page]).per(20)
+    end
     #新規投稿用taskのインスタンス化
+    
+    #@tasks = @tasks.where(status: 'todo')
+    
     @task = Task.new
   end
 
