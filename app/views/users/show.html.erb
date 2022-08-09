@@ -10,7 +10,7 @@
 <%= link_to 'done', root_path(status: 'done')%>
 
 <% if params[:status]== 'done'%>
-        <td><%= link_to 'done全削除ボタン', tasks_path, method: :delete, data: {confirm: '削除しますか？'} %></td>
+        <td><%= link_to 'done全削除ボタン', all_done_destroy_task_path(), method: :patch, data: {confirm: '削除しますか？'} %></td>
 <% end %>
 
 <%= render 'commons/tasks' %>

@@ -32,7 +32,7 @@ class UsersController < ApplicationController
     if @user.save
       session[:user_id] = @user.id
       flash[:success] = '登録しました' #一回だけ表示
-      redirect_to root_path 
+      redirect_to root_path
     else
       flash.now[:danger] = '登録できませんでした'
       render :new
