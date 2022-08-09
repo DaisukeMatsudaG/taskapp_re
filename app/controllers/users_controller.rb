@@ -1,13 +1,18 @@
 class UsersController < ApplicationController
-#  before_action :require_logged_in, only: [:show]
-#  before_action :already_logged_in, only: [:new, :create]
+  before_action :require_logged_in, only: [:show]
+  before_action :already_logged_in, only: [:new, :create]
 
   def show
-    @user = User.last
+    @user = User.find_by(id: session[:user_id])
+    if !@user
+      return redirect_to signin_path
+    end
+    @tasks = current_user.tasks.all
+    @task = Task.new
   end
 
   def new
-    @user = User.new##なに？
+    @user = User.new
   end
 
   def create

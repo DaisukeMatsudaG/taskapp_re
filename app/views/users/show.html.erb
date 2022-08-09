@@ -1,1 +1,11 @@
-<h3><%= @user.name %>さん、ようこそ</h3>
+<h3><%= @user.name %>さんのタスク一覧</h3>
+<%= link_to '新規登録', new_task_path%>
+<%= form_with model: @task do |f|%>
+    <dl>
+    <dt>タスク内容</dt>
+    <dd><%= f.text_field :content %></dd>
+    </dl>
+    <%= f.submit '投稿する' %>
+    <!--<%= link_to 'キャンセル', tasks_path %>-->
+<% end %>
+<%= render 'commons/tasks' %>
