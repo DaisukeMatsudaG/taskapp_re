@@ -7,7 +7,11 @@ class UsersController < ApplicationController
     if !@user
       return redirect_to signin_path
     end
-    @tasks = current_user.tasks.all
+    #以下で全件を取得している。
+    #current_user.tasks.allで全件、page~.でページネーションに関する記述
+    #perで表示形式の変更
+    @tasks = current_user.tasks.all.page(params[:page]).per(20)  
+    #新規投稿用taskのインスタンス化
     @task = Task.new
   end
 

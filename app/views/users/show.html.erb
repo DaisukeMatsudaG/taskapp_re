@@ -1,11 +1,9 @@
 <h3><%= @user.name %>さんのタスク一覧</h3>
-<%= link_to '新規登録', new_task_path%>
 <%= form_with model: @task do |f|%>
-    <dl>
-    <dt>タスク内容</dt>
-    <dd><%= f.text_field :content %></dd>
-    </dl>
+    <%= f.text_field :content %>
     <%= f.submit '投稿する' %>
-    <!--<%= link_to 'キャンセル', tasks_path %>-->
 <% end %>
 <%= render 'commons/tasks' %>
+
+<%#ページネーション用の記述%>
+<%= paginate @tasks %>
