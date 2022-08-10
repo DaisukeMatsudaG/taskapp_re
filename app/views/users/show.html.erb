@@ -1,17 +1,23 @@
 <h3><%= @user.name %>さんのタスク一覧</h3>
 <%= form_with model: @task do |f|%>
+    <%= f.date_select :deadline%>
     <%= f.text_field :content %>
     <%= f.submit '投稿する',class: "btn btn-primary" %>
 <% end %>
 
 <%= link_to 'all' ,root_path,class: "btn btn-info"%>
 <%= link_to 'todo',root_path(status: 'todo'),class: "btn btn-info"%>
-<%= link_to 'doing', root_path(status: 'doing'),class: "btn btn-info"%>
-<%= link_to 'done', root_path(status: 'done'),class: "btn btn-info"%>
+<%= link_to 'doing',root_path(status: 'doing'),class: "btn btn-info"%>
+<%= link_to 'done',root_path(status: 'done'),class: "btn btn-info"%>
 
 <% if params[:status]== 'done'%>
         <td><%= link_to 'done全削除ボタン', all_done_destroy_task_path(), method: :patch, data: {confirm: '削除しますか？'} ,class: "btn btn-primary"%></td>
 <% end %>
+
+  <%= form_with url: search_path, method: :get, local: true do |f| %>
+    <%= f.text_field :keyword%>
+    <%= f.submit "検索" %>
+  <% end %>
 
 <%= render 'commons/tasks' %>
 
