@@ -1,0 +1,10 @@
+<h3>ログイン</h3>
+<%= form_with(url: signin_path, scope: :session) do |f|%>
+<dl>
+    <dt>E-mail</dt>
+    <dd><%= f.email_field  :email %></dd>
+    <dt>パスワード</dt>
+    <dd><%= f.password_field :password%></dd>
+</dl>
+<%= f.submit 'ログイン'%>
+<% end %>

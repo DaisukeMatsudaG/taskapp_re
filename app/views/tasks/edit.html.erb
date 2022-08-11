@@ -1,0 +1,12 @@
+<h3>タスク内容の編集</h3>
+<dt>ステータス</dt>
+<%= @task.status %>
+<% Task::STATUSES.each do |status| %>
+    <%= link_to status, update_status_task_path(@task, status: status), method: :patch %>
+<% end %>
+
+<%= form_with model: @task do |f|%>
+    <%= render 'form', f: f %>
+    <%= f.submit 'タスク内容を変更する',class: "btn btn-primary"  %>
+    <%= link_to 'キャンセル', root_path %>
+<% end %>
