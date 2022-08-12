@@ -9,6 +9,7 @@
         <td><%= task.status %></td>
         <td><%= form_with model: task do |t|%>
             <%= t.select task.status, {todo: "todo", doing: "doing", done: "done"} %>
+            <%= t.submit %>
         <% end %>
         </td>
         <td><%= task.content %></td>

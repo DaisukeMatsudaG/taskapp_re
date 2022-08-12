@@ -59,3 +59,5 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'kaminari'
 
 gem 'bootstrap-sass', '~> 3.3.6'
+
+gem 'wdm', '>= 0.1.0'

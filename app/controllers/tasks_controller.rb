@@ -7,8 +7,8 @@ class TasksController < ApplicationController
   #  @tasks = Task.all
   #end
 
-  #def show
-  #end
+  def show
+  end
 
   #def new
   #  @task = Task.new
@@ -66,7 +66,7 @@ class TasksController < ApplicationController
 
   private
   def task_params
-    params.require(:task).permit(:content,:deadline)
+    params.require(:task).permit(:content,:deadline,:status)
   end
 
 
