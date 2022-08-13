@@ -16,6 +16,11 @@ class UsersController < ApplicationController
     else
       @tasks = current_user.tasks.all.page(params[:page]).per(20)
     end
+    #@tasks = Task.where(content: params[:keyword])
+    keyword = params[:keyword]
+    if keyword.present?
+      @tasks = current_user.tasks.where(content: keyword).page(params[:page]).per(20)      
+    end
     #新規投稿用taskのインスタンス化
     
     #@tasks = @tasks.where(status: 'todo')

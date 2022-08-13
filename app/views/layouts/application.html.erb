@@ -15,7 +15,7 @@
   <p>
   <% if logged_in? %>
     <%= link_to 'HOME', root_path%>
-    <%= link_to 'ログアウト', signout_path, {method: :post} %>
+    <%= link_to 'ログアウト', signout_path, {method: :delete} %>
   <% else %>
     <%= link_to '会員登録', signup_path%>
     <%= link_to 'ログイン', signin_path%>
