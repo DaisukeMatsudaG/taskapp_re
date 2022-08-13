@@ -10,5 +10,7 @@
 <% if @task.user_id == current_user.id%>
 <%= link_to '編集ボタン', edit_task_path(@task)%>
 |
-<%= link_to '削除ボタン', task_path(@task), method: :delete, data: {confirm: '削除しますか？'} %>
+<%#= link_to "hoge", {controller: "tasks", action: "destroy"}, method: :post %>
+<%= link_to '削除ボタン', controller: "tasks", action: "destroy", id: @task , method: :post %>
+<%#= link_to '削除ボタン', task_path(@task), method:delete, data: {confirm: '削除しますか？'} %>
 <% end %>

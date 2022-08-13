@@ -1,14 +1,14 @@
 class TasksController < ApplicationController
   before_action :require_logged_in
-  before_action :set_task, only: [:edit, :update, :destroy, :update_status]
+  before_action :set_task, only: [:edit, :update, :destroy, :update_status, :show]
   before_action :set_tasks, only: [:all_done_destroy]
   before_action :correct_user, only: [:edit, :update, :destroy, :update_status]
   #def index
   #  @tasks = Task.all
   #end
 
-  def show
-  end
+  #def show
+  #end
 
   #def new
   #  @task = Task.new
