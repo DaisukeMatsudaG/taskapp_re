@@ -18,11 +18,11 @@ class UsersController < ApplicationController
     end
     #@tasks = Task.where(content: params[:keyword])
     keyword = params[:keyword]
-    if keyword.present?
-      @tasks = current_user.tasks.where(content: keyword).page(params[:page]).per(20)      
+    if keyword.present?#ここでkeywordであいまい検索
+      @tasks = current_user.tasks.where('content LIKE ? ', "%#{keyword}%").page(params[:page]).per(20)
     end
     #新規投稿用taskのインスタンス化
-    
+     
     #@tasks = @tasks.where(status: 'todo')
     
     @task = Task.new
