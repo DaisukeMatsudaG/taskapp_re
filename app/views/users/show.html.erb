@@ -1,4 +1,4 @@
-<h3><%= @user.name %>さんのタスク一覧</h3>
+<h3 class="bg-info"><%= @user.name %>さんのタスク一覧</h3>
 <%= form_with model: @task do |f|%>
     <%= f.date_select :deadline%>
     <%= f.text_field :content %>
