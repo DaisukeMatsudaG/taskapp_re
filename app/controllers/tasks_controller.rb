@@ -2,7 +2,7 @@ class TasksController < ApplicationController
   before_action :require_logged_in
   before_action :set_task, only: [:edit, :update, :destroy, :update_status, :show]
   before_action :set_tasks, only: [:all_done_destroy]
-  before_action :correct_user, only: [:edit, :update, :destroy, :update_status, :serach]
+  before_action :correct_user, only: [:edit, :update, :destroy, :update_status]
   #def index
   #  @tasks = Task.all
   #end
@@ -55,7 +55,7 @@ class TasksController < ApplicationController
   def search
     #@tasks = Task.where(content: params[:keyword])
     #@keyword = params[:keyword]
-    redirect_to root_path(keyword: params[:keyword])
+    redirect_to root_path(keyword: params[:keyword] ,deadline: params[:deadline])
   end
 
   def all_done_destroy
@@ -66,7 +66,7 @@ class TasksController < ApplicationController
 
   private
   def task_params
-    params.require(:task).permit(:content,:deadline,:status)
+    params.require(:task).permit(:content,:deadline,:status,:estimated_time)
   end
 
 

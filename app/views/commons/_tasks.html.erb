@@ -1,23 +1,22 @@
 <table class="container">
     <tr>
-    <th>締め切り日</th><th>ステータス</th><th>ステータス変更</th><th>タスク内容</th><th>削除</th>
+    <th class="text-center">締め切り日</th><th class="text-center">時間/分</th><th class="text-center">タスク内容</th><th class="text-center">ステータス更新</th><th>削除</th>
     </tr>
     <% @tasks.each do |task|%>
     <tr>
         <%#= task.id %>
-        <td><%= task.deadline %></td>
-        <td><%= task.status %></td>
-        <td>
+        <td class="text-center display-6"><%= task.deadline.strftime("%m/%d") %></td>
+        <td class="text-center display-6"><%= task.estimated_time %></td>
+        <td><%= task.content %></td>
+        <td><%= task.status %>
             <%= form_with model: task do |t|%>
             <%= t.select :status, {todo: "todo", doing: "doing", done: "done"} %>
             <%= t.submit '更新'%>
         <% end %>
         </td>
-        <td><%= task.content %></td>
         <%#= task.created_at.to_s(:datetime_jp) %>
         <%#= link_to '編集ボタン', edit_task_path(task)%>
-        <td><%= link_to '削除', task_path(task), method: :delete, data:  {confirm: '削除しますか？'} %></td>
+        <td><%= link_to '削除', task_path(task), method: :delete, data:  {confirm: '削除しますか？'},class: "btn btn-danger" %></td>
     </tr>
     <% end %>
-    
 </table>
