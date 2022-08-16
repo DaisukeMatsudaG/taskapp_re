@@ -3,7 +3,7 @@
     <%= f.date_select :deadline%>
     <%= f.select :estimated_time, {"15分"=> "15","30分"=> "30","45分"=> "45", "60分"=> "60", "90分"=> "90","120分"=> "120","180分"=> "180"},include_blank: true %>
     <%= f.text_field :content %>
-    <%= f.submit '登録する',class: "btn btn-primary" %>
+    <%= f.submit 'タスクを追加',class: "btn btn-primary" %>
 <% end %>
 
 <%#= link_to 'all' ,root_path,class: "btn btn-info"%>
@@ -21,7 +21,7 @@
     <!--ここでチェックボックスなどいれればいいのではないかな？-->
     検索ワード
     <%= f.text_field :keyword %>
-    <%= f.submit "検索" %>
+    <%= f.submit "検索" , class: 'btn search-button'%>
   <% end %>
 
 <%= render 'commons/tasks' %>
