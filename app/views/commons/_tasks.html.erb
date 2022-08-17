@@ -6,11 +6,11 @@
     <tr>
         <%#= task.id %>
         <% if task.deadline.present?%>
-            <td class="text-center display-6"><%= task.deadline.strftime("%m/%d") %></td>
+            <td class="text-center"><%= task.deadline.strftime("%m/%d") %></td>
         <% else %>
-            <td class="text-center display-6"><%= task.deadline%></td>
+            <td class="text-center"><%= task.deadline%></td>
         <% end %>
-        <td class="text-center display-6"><%= task.estimated_time %></td>
+        <td class="text-center"><%= task.estimated_time %></td>
         <td><%= task.content %></td>
         <td><%= task.status %>
             <%= form_with model: task do |t|%>

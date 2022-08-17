@@ -28,6 +28,8 @@ class UsersController < ApplicationController
 
     if deadline.present?#ここでdeadlineの検索
       @tasks = @tasks.where('deadline = ?',deadline).order(:deadline).page(params[:page]).per(20)
+    else
+      @tasks = @tasks.where('deadline = ?',Date.today).order(:deadline).page(params[:page]).per(20)
     end
     #新規投稿用taskのインスタンス化
      

@@ -3,16 +3,7 @@ class TasksController < ApplicationController
   before_action :set_task, only: [:edit, :update, :destroy, :update_status, :show]
   before_action :set_tasks, only: [:all_done_destroy]
   before_action :correct_user, only: [:edit, :update, :destroy, :update_status]
-  #def index
-  #  @tasks = Task.all
-  #end
 
-  #def show
-  #end
-
-  #def new
-  #  @task = Task.new
-  #end
   def update_status
     @task =Task.find(params[:id])
     @task.update(status: params[:status])
