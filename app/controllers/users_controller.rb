@@ -12,24 +12,21 @@ class UsersController < ApplicationController
     #perで表示形式の変更
     status = params[:status]
     if status.present?
-      @tasks = current_user.tasks.where(status: status).order(:deadline).page(params[:page]).per(20)
+      @tasks = current_user.tasks.where(status: status).order(:deadline).order(status: :desc).page(params[:page]).per(20)
     else
-      @tasks = current_user.tasks.all.order(:deadline).page(params[:page]).per(20)
+      @tasks = current_user.tasks.all.order(:deadline).order(status: :desc).page(params[:page]).per(20)
     end
     #@tasks = Task.where(content: params[:keyword])
     keyword = params[:keyword]
     deadline = params[:deadline]
-    puts "確認"
-    p deadline
-    p "確認"
     if keyword.present?#ここでkeywordであいまい検索
-      @tasks = current_user.tasks.where('content LIKE ? ', "%#{keyword}%").order(:deadline).page(params[:page]).per(20)
+      @tasks = current_user.tasks.where('content LIKE ? ', "%#{keyword}%").order(:deadline).order(status: :desc).page(params[:page]).per(20)
     end
 
     if deadline.present?#ここでdeadlineの検索
-      @tasks = @tasks.where('deadline = ?',deadline).order(:deadline).page(params[:page]).per(20)
+      @tasks = @tasks.where('deadline = ?',deadline).order(:deadline).order(status: :desc).page(params[:page]).per(20)
     else
-      @tasks = @tasks.where('deadline = ?',Date.today).order(:deadline).page(params[:page]).per(20)
+      @tasks = @tasks.where('deadline = ?',Date.today).order(:deadline).order(status: :desc).page(params[:page]).per(20)
     end
     #新規投稿用taskのインスタンス化
      

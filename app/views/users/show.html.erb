@@ -6,8 +6,8 @@
 <% if params[:status]== 'done'%>
         <td><%= link_to 'done全削除ボタン', all_done_destroy_task_path(), method: :patch, data: {confirm: '削除しますか？'} ,class: "btn btn-primary"%></td>
 <% end %>
-<div class="d-flex">
-    <div>
+<div class="d-flex bd-highlight">
+    <div class="p-2 w-100 bd-highlight"">
       <h3 class="bg-info">本日のToDo一覧<br>
       <%= Date.today.strftime("%Y年%m月%d日")%>
       
@@ -17,7 +17,7 @@
 
     </div>
 
-  <div>
+  <div class="p-2 flex-shrink-1 bd-highlight border border-info">
     <% if logged_in? %>
       <%= link_to 'HOME', root_path%>
       <%= link_to 'ログアウト', signout_path, {method: :delete} %>

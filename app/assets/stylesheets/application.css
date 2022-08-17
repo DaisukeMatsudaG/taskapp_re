@@ -15,6 +15,22 @@
  *= require_self
  */
  
+ .task-del-line {
+    color: orange;
+    text-decoration: line-through 2px;
+    
+}
+
+span{
+    color: black;
+}
+
+.alert {
+    padding: 8px;
+    border-radius: 4px;
+    margin-bottom: 15px;
+}
+
  .alert {
     padding: 8px;
     border-radius: 4px;
@@ -61,3 +77,4 @@ th, td {
 th {
     background: #eee;
 }
+

@@ -1,6 +1,6 @@
 class TasksController < ApplicationController
   before_action :require_logged_in
-  before_action :set_task, only: [:edit, :update, :destroy, :update_status, :show]
+  before_action :set_task, only: [:edit, :update, :destroy, :update_status, :show, :update_status]
   before_action :set_tasks, only: [:all_done_destroy]
   before_action :correct_user, only: [:edit, :update, :destroy, :update_status]
 
@@ -9,6 +9,13 @@ class TasksController < ApplicationController
     @task.update(status: params[:status])
     redirect_to edit_task_path(@task), notice: "ステータスを変更しました"
   end
+
+  def button_update_status
+    @task =Task.find(params[:id])
+    @task.update(status: params[:status])
+    redirect_to root_path, notice: "ステータスを変更しました"
+  end
+
 
   def create
     @task = current_user.tasks.build(task_params)
@@ -53,11 +60,23 @@ class TasksController < ApplicationController
     redirect_to root_path(keyword: params[:keyword] ,deadline: deadline)
   end
 
+  def button_update_status
+    if @task.update(task_params)
+      flash[:success] = "更新しました"
+      redirect_to root_path
+    else
+      flash.now[:danger] = "更新できませんでした"
+      redirect_to root_path
+    end
+  end
+
+
   def all_done_destroy
     @tasks.destroy_all
     flash[:success] = "削除しました"
     redirect_to root_path
   end
+  
 
   private
   def task_params
