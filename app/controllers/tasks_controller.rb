@@ -10,13 +10,6 @@ class TasksController < ApplicationController
     redirect_to edit_task_path(@task), notice: "ステータスを変更しました"
   end
 
-  def button_update_status
-    @task =Task.find(params[:id])
-    @task.update(status: params[:status])
-    redirect_to root_path, notice: "ステータスを変更しました"
-  end
-
-
   def create
     @task = current_user.tasks.build(task_params)
     # user_id
@@ -24,10 +17,10 @@ class TasksController < ApplicationController
     # Book.new(user_id: sessionc[:user_id],~~~)と書くのと同じことである
     if @task.save
       flash[:success] = "登録しました"
-      redirect_to root_path
+      redirect_back(fallback_location: root_path) 
     else
       flash[:danger] = "登録できませんでした"
-      redirect_to root_path
+      redirect_back(fallback_location: root_path) 
     end
   end
   
@@ -37,26 +30,34 @@ class TasksController < ApplicationController
   def update
     if @task.update(task_params)
       flash[:success] = "更新しました"
-      redirect_to root_path
+      redirect_back(fallback_location: root_path) 
+  
     else
       flash.now[:danger] = "更新できませんでした"
-      render :edit
+      redirect_back(fallback_location: root_path) 
     end
   end
 
   def destroy
     @task.destroy
     flash[:success] = "削除しました"
-    redirect_to root_path
+    redirect_back(fallback_location: root_path) 
   end
 
   def search
     #@tasks = Task.where(content: params[:keyword])
     #@keyword = params[:keyword]
+    
     deadline_year = params["deadline(1i)"]
     deadline_month = params["deadline(2i)"]
     deadline_day = params["deadline(3i)"]
-    deadline = "#{deadline_year}-#{deadline_month}-#{deadline_day}"
+    # deadlineを指定していればdeadlineオブジェクトを生成
+    if deadline_year.present? & deadline_month.present? & deadline_day.present? 
+      deadline = "#{deadline_year}-#{deadline_month}-#{deadline_day}"
+    # そうでなければnil
+    else
+      deadline = nil
+    end
     redirect_to root_path(keyword: params[:keyword] ,deadline: deadline)
   end
 

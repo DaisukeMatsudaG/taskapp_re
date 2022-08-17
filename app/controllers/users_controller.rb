@@ -11,23 +11,28 @@ class UsersController < ApplicationController
     #current_user.tasks.allで全件、page~.でページネーションに関する記述
     #perで表示形式の変更
     status = params[:status]
-    if status.present?
-      @tasks = current_user.tasks.where(status: status).order(:deadline).order(status: :desc).page(params[:page]).per(20)
-    else
-      @tasks = current_user.tasks.all.order(:deadline).order(status: :desc).page(params[:page]).per(20)
-    end
-    #@tasks = Task.where(content: params[:keyword])
-    keyword = params[:keyword]
     deadline = params[:deadline]
-    if keyword.present?#ここでkeywordであいまい検索
-      @tasks = current_user.tasks.where('content LIKE ? ', "%#{keyword}%").order(:deadline).order(status: :desc).page(params[:page]).per(20)
-    end
+    keyword = params[:keyword]
 
     if deadline.present?#ここでdeadlineの検索
-      @tasks = @tasks.where('deadline = ?',deadline).order(:deadline).order(status: :desc).page(params[:page]).per(20)
+      @tasks = current_user.tasks.where('deadline = ?',deadline)
     else
-      @tasks = @tasks.where('deadline = ?',Date.today).order(:deadline).order(status: :desc).page(params[:page]).per(20)
+      @tasks = current_user.tasks
     end
+
+    #タスクのステータスによる絞り込み    
+    if status.present?
+      @tasks = @tasks.tasks.where(status: status)
+    end
+
+    #タスク内容のキーワードによる絞り込み
+    if keyword.present?#ここでkeywordであいまい検索
+      @tasks =@tasks.where('content LIKE ? ', "%#{keyword}%")
+    end
+
+
+    #@tasksの並び替えとpage切り分け作業
+    @tasks = @tasks.order(:deadline).order(estimated_time: :desc).page(params[:page]).per(20)
     #新規投稿用taskのインスタンス化
      
     #@tasks = @tasks.where(status: 'todo')
