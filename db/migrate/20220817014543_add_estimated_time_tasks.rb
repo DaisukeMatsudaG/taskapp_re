@@ -1,4 +1,4 @@
-class AddEstimatedTimeToTasks < ActiveRecord::Migration[6.1]
+class AddEstimatedTimeTasks < ActiveRecord::Migration[6.1]
   def change
     add_column :tasks, :estimated_time, :integer
   end

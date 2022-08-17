@@ -5,7 +5,11 @@
     <% @tasks.each do |task|%>
     <tr>
         <%#= task.id %>
-        <td class="text-center display-6"><%= task.deadline.strftime("%m/%d") %></td>
+        <% if task.deadline.present?%>
+            <td class="text-center display-6"><%= task.deadline.strftime("%m/%d") %></td>
+        <% else %>
+            <td class="text-center display-6"><%= task.deadline%></td>
+        <% end %>
         <td class="text-center display-6"><%= task.estimated_time %></td>
         <td><%= task.content %></td>
         <td><%= task.status %>

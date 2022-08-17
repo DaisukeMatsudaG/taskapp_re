@@ -55,7 +55,11 @@ class TasksController < ApplicationController
   def search
     #@tasks = Task.where(content: params[:keyword])
     #@keyword = params[:keyword]
-    redirect_to root_path(keyword: params[:keyword] ,deadline: params[:deadline])
+    deadline_year = params["deadline(1i)"]
+    deadline_month = params["deadline(2i)"]
+    deadline_day = params["deadline(3i)"]
+    deadline = "#{deadline_year}-#{deadline_month}-#{deadline_day}"
+    redirect_to root_path(keyword: params[:keyword] ,deadline: deadline)
   end
 
   def all_done_destroy

@@ -14,17 +14,21 @@
 <% if params[:status]== 'done'%>
         <td><%= link_to 'done全削除ボタン', all_done_destroy_task_path(), method: :patch, data: {confirm: '削除しますか？'} ,class: "btn btn-primary"%></td>
 <% end %>
-
-  <%= form_with url: search_path, method: :get, local: true do |f| %>
-    締め切り日
-    <%= f.date_select :deadline %><br>
-    <!--ここでチェックボックスなどいれればいいのではないかな？-->
-    検索ワード
-    <%= f.text_field :keyword %>
-    <%= f.submit "検索" , class: 'btn search-button'%>
-  <% end %>
-
-<%= render 'commons/tasks' %>
+<div class="d-flex">
+    <div>
+    <%= render 'commons/tasks' %>
+    </div>
+  <div>
+    <%= form_with url: search_path, method: :get, local: true do |f| %>
+      締め切り日
+      <%= f.date_select :deadline %><br>
+      <!--ここでチェックボックスなどいれればいいのではないかな？-->
+      検索ワード
+      <%= f.text_field :keyword %>
+      <%= f.submit "検索" %>
+    <% end %>
+    </div>
+</div>
 
 <%#ページネーション用の記述%>
 <h3 class="text-center"><%= paginate @tasks %></h3>

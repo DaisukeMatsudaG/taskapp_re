@@ -26,7 +26,7 @@ class UsersController < ApplicationController
       @tasks = current_user.tasks.where('content LIKE ? ', "%#{keyword}%").order(:deadline).page(params[:page]).per(20)
     end
 
-    if deadline.present?#ここでkeywordであいまい検索
+    if deadline.present?#ここでdeadlineの検索
       @tasks = @tasks.where('deadline = ?',deadline).order(:deadline).page(params[:page]).per(20)
     end
     #新規投稿用taskのインスタンス化
