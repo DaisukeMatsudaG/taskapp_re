@@ -3,11 +3,11 @@
 <%#= link_to 'doing',root_path(status: 'doing'),class: "btn btn-info"%>
 <%#= link_to 'done',root_path(status: 'done'),class: "btn btn-info"%>
 
-<div class="text-right">
-<% if logged_in? %>
-  <%= link_to 'HOME', root_path%>
-  <%= link_to 'ログアウト', signout_path, {method: :delete} %>
-<% end %>
+<div class="text-end">
+  <% if logged_in? %>
+    <%= link_to '検索解除', root_path%>
+    <%= link_to 'ログアウト', signout_path, {method: :delete} %>
+  <% end %>
 </div>
 
 <% if params[:status]== 'done'%>
@@ -16,7 +16,7 @@
 
 <div class="d-flex bd-highlight">
     <div class="p-2 w-100 bd-highlight">
-      <h3 class="bg-info text-center">
+      <h3 class="bg-info text-center rounded-pill">
       ToDo一覧<br>
       <% if params[:deadline].present? %>
           <%= "指定日 '#{params[:deadline]}'"%>
@@ -30,26 +30,38 @@
 
       <%= render 'commons/tasks' %>
     </div>
-  <div class="p-2 flex-shrink-1 bd-highlight">
+  <div class="p-4 flex-shrink-1 bd-highlight">
 
-    <div class="border border-info">
-    【ToDo追加フォーム】
+    <div class="mb-2 p-4 bg-info rounded">
+    <h5>【ToDo追加フォーム】</h5>
       <%= form_with model: @task do |f|%>
-          <%= f.date_select :deadline%>
+          締め切り日
+          <br>
+          <%= f.date_select :deadline, use_month_numbers: true %>
+          <br>
+          目安(分)
+          <br>
           <%= f.select :estimated_time, {"15分"=> "15","30分"=> "30","45分"=> "45", "60分"=> "60", "90分"=> "90","120分"=> "120","180分"=> "180"},include_blank: true%>
+          <br>
+          タスク内容
+          <br>          
           <%= f.text_field :content %>
           <%= f.submit 'ToDoを追加',class: "btn btn-primary" %>
       <% end %>
     </div>
 
-    <div class="border border-info">
-    【検索フォーム】
+    <div class="p-4 bg-info rounded">
+    <h5>【検索フォーム】</h5>
     <%= form_with url: search_path, method: :get, local: true do |f| %>
       締め切り日
-      <%= f.date_select :deadline , include_blank: true,selected: Date.today %><br>
+      <br>
+      <%= f.date_select :deadline , include_blank: true,use_month_numbers: true, selected: Date.today%><br>
       <!--ここでチェックボックスなどいれればいいのではないかな？-->
+      <br>
       検索ワード
+      <br>
       <%= f.text_field :keyword %>
+      <br>
       <%= f.submit "検索" %>
     <% end %>
     </div>
