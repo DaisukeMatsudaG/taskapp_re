@@ -1,0 +1,16 @@
+<h3>タスク詳細</h3>
+<dl>
+    
+    <dt>タスク内容</dt>
+    <dd><%= @task.content %></dd>
+
+</dl>
+
+<hr>
+<% if @task.user_id == current_user.id%>
+<%= link_to '編集ボタン', edit_task_path(@task)%>
+|
+<%#= link_to "hoge", {controller: "tasks", action: "destroy"}, method: :post %>
+<%= link_to '削除ボタン', controller: "tasks", action: "destroy", id: @task , method: :post %>
+<%#= link_to '削除ボタン', task_path(@task), method:delete, data: {confirm: '削除しますか？'} %>
+<% end %>

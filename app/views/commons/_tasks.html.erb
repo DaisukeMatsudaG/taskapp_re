@@ -1,0 +1,33 @@
+<table class="container roundeddg-light table">
+    <tr>
+    <th class="text-center"><i class="h4 fas fa-tasks"></i></th><th class="text-center"><i class="h4 fa-solid fa-calendar-days"></i></th><th class="h4 text-center"><i class="fas fa-stopwatch"></i>/分</th><th class="text-center"><i class="h4 fas fa-trash-alt"></i></th>
+    </tr>
+    <% @tasks.each do |task|%>
+    <tr>
+        <td>
+            <% if task.status == "done" %>
+                <div class='task-del-line'>
+                <a href="<%= task_path(task, "task[status]" => "todo") %>" data-method="patch"><i class="fas fa-check-square"></i></i></a>
+                <span><%= task.content %></span></div>
+            <% else %>
+                <a href="<%= task_path(task, "task[status]" => "done") %>" data-method="patch"><i class="fas fa-square"></i></a>
+                <%= task.content %>
+            <% end %>
+        </td>
+
+        <!--締め切り日-->
+        <% if task.deadline.present?%>
+            <td class="text-center"><%= task.deadline.strftime("%m/%d") %></td>
+        <% else %>
+            <td class="text-center"><%= task.deadline%></td>
+        <% end %>
+
+        <td class="text-center"><%= task.estimated_time %></td>
+
+        <td>      
+        <a data-confirm="削除しますか？"rel="nofollow" data-method="delete" href="<%= task_path(task) %>"><div class="text-center"><i class="fas fa-trash-alt"></i></div></a>
+</td>
+    </tr>
+    <% end %>
+</table>
+

@@ -21,6 +21,9 @@ Rails.application.routes.draw do
   end
   patch 'all_done_destroy' , to: 'tasks#all_done_destroy', as: "all_done_destroy_task"
 
+  patch 'button_update_status' , to: 'tasks#button_update_status'
 
+
+  get 'search' => 'tasks#search'
   #post '/' ,to: 'tasks#show'
 end

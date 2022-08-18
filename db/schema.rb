@@ -10,10 +10,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_08_09_052817) do
+ActiveRecord::Schema.define(version: 2022_08_17_053420) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "events", force: :cascade do |t|
+    t.string "name"
+    t.datetime "start_time"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "favorites", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "keyword", limit: 255, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_favorites_on_user_id"
+  end
 
   create_table "tasks", force: :cascade do |t|
     t.bigint "user_id", null: false
@@ -21,6 +36,8 @@ ActiveRecord::Schema.define(version: 2022_08_09_052817) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "status", default: "todo", null: false
+    t.date "deadline"
+    t.integer "estimated_time"
     t.index ["user_id"], name: "index_tasks_on_user_id"
   end
 
@@ -33,5 +50,6 @@ ActiveRecord::Schema.define(version: 2022_08_09_052817) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  add_foreign_key "favorites", "users"
   add_foreign_key "tasks", "users"
 end
