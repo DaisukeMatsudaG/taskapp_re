@@ -10,7 +10,6 @@ class UsersController < ApplicationController
     #以下で全件を取得している。
     #current_user.tasks.allで全件、page~.でページネーションに関する記述
     #perで表示形式の変更
-    status = params[:status]
     deadline = params[:deadline]
     keyword = params[:keyword]
 
@@ -18,11 +17,6 @@ class UsersController < ApplicationController
       @tasks = current_user.tasks.where('deadline = ?',deadline)
     else
       @tasks = current_user.tasks
-    end
-
-    #タスクのステータスによる絞り込み    
-    if status.present?
-      @tasks = @tasks.tasks.where(status: status)
     end
 
     #タスク内容のキーワードによる絞り込み
@@ -33,10 +27,8 @@ class UsersController < ApplicationController
 
     #@tasksの並び替えとpage切り分け作業
     @tasks = @tasks.order(deadline: :desc).order(estimated_time: :desc).order(status: :desc).page(params[:page]).per(20)
-    #新規投稿用taskのインスタンス化
-     
-    #@tasks = @tasks.where(status: 'todo')
-    
+
+    #タスク追加フォーム用のtaskのインスタンス化    
     @task = Task.new
   end
 

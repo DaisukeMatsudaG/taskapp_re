@@ -16,8 +16,8 @@
  */
  
  .task-del-line {
-    color: orange;
-    text-decoration: line-through 2px;
+    color: gray;
+    text-decoration: line-through 3px;
     
 }
 
