@@ -4,9 +4,6 @@
     </tr>
     <% @tasks.each do |task|%>
     <tr>
-        <!--doneボタン-->
-            <%#= link_to '未完了', task_path(task, "task[status]" => "todo"), method: :patch%>
-            <%#= link_to '完了', task_path(task, "task[status]" => "done"), method: :patch%>
         <td>
             <% if task.status == "done" %>
                 <div class='task-del-line'>
@@ -26,9 +23,7 @@
 
         <td class="text-center"><%= task.estimated_time %></td>
 
-        <%#= task.created_at.to_s(:datetime_jp) %>
-        <%#= link_to '編集ボタン', edit_task_path(task)%>
-        <td><%#= link_to '削除', task_path(task), method: :delete, data:  {confirm: '削除しますか？'},class: "btn btn-danger" %>        
+        <td>      
         <a data-confirm="削除しますか？"rel="nofollow" data-method="delete" href="<%= task_path(task) %>"><div class="text-center"><i class="fas fa-trash-alt"></i></div></a>
 </td>
     </tr>

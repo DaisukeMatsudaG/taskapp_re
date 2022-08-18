@@ -32,7 +32,7 @@ class UsersController < ApplicationController
 
 
     #@tasksの並び替えとpage切り分け作業
-    @tasks = @tasks.order(deadline: :desc).order(estimated_time: :desc).page(params[:page]).per(20)
+    @tasks = @tasks.order(deadline: :desc).order(estimated_time: :desc).order(status: :desc).page(params[:page]).per(20)
     #新規投稿用taskのインスタンス化
      
     #@tasks = @tasks.where(status: 'todo')
