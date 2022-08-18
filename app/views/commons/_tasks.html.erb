@@ -1,6 +1,6 @@
-<table class="container rounded">
+<table class="container roundeddg-light table">
     <tr>
-    <th class="text-center">タスク内容</th><th class="text-center">締め切り日</th><th class="text-center">時間(分)</th><th class="text-center">削除</th>
+    <th class="text-center"><i class="h4 fas fa-tasks"></i></th><th class="text-center"><i class="h4 fa-solid fa-calendar-days"></i></th><th class="text-center"><i class="fas fa-stopwatch"></i></br>/minutes</th><th class="text-center"><i class="h4 fas fa-trash-alt"></i></th>
     </tr>
     <% @tasks.each do |task|%>
     <tr>
@@ -29,7 +29,7 @@
         <%#= task.created_at.to_s(:datetime_jp) %>
         <%#= link_to '編集ボタン', edit_task_path(task)%>
         <td><%#= link_to '削除', task_path(task), method: :delete, data:  {confirm: '削除しますか？'},class: "btn btn-danger" %>        
-        <a data-confirm="削除しますか？"rel="nofollow" data-method="delete" href="<%= task_path(task) %>"><i class="fas fa-trash-alt"></i></a>
+        <a data-confirm="削除しますか？"rel="nofollow" data-method="delete" href="<%= task_path(task) %>"><div class="text-center"><i class="fas fa-trash-alt"></i></div></a>
 </td>
     </tr>
     <% end %>

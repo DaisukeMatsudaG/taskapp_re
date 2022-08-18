@@ -19,7 +19,12 @@
     <%= link_to 'ログイン', signin_path%>
   <% end %>
   </p>
-
+<div class="text-end">
+  <% if logged_in? %>
+    <a href="/"><i class="h5 fas fa-home"></i></a>
+    <a rel="nofollow" data-method="delete" href="/signout"><i class="h5 fas fa-sign-out-alt"></i></a>
+  <% end %>
+</div>
   <p>
     <%= render 'commons/flash' %>
     <%= yield %>
