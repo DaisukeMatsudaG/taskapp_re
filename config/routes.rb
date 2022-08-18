@@ -14,15 +14,7 @@ Rails.application.routes.draw do
 
 
   #taskに関してのルーティング
-  resources :tasks do
-    member do
-      patch :update_status
-    end
-  end
-  patch 'all_done_destroy' , to: 'tasks#all_done_destroy', as: "all_done_destroy_task"
-
-  patch 'button_update_status' , to: 'tasks#button_update_status'
-
+  resources :tasks
 
   get 'search' => 'tasks#search'
   #post '/' ,to: 'tasks#show'
